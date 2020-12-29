@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import chess
 
-# a total of 13 states for each square
-
 class State():
   def __init__(self, board=None):
     if board is None:

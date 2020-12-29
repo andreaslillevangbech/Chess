@@ -23,9 +23,8 @@ class Valuator():
     self.count = 0
 
 MAXVAL = 10000
-
 def minimax(s, v, depth, a, b, big=False):
-  if depth>=5 or s.board.is_game_over():
+  if depth>=3 or s.board.is_game_over():
     return v(s)
 
   #White is maxing
@@ -37,6 +36,7 @@ def minimax(s, v, depth, a, b, big=False):
   if big: 
     bret = []
 
+	# Prune with beam search
   isort = []
   for e in s.board.legal_moves:
     s.board.push(e)
@@ -44,7 +44,7 @@ def minimax(s, v, depth, a, b, big=False):
     s.board.pop()
   move = sorted(isort, key=lambda x: x[0], reverse=s.board.turn)
 
-  if depth >= 3:
+  if depth >= 2:
     move = move[:10]
 
   for e in [x[1] for x in move]:
@@ -59,7 +59,7 @@ def minimax(s, v, depth, a, b, big=False):
       if a>=b:
         break   # b cut-off
     else:
-      ret = min(b, ret)
+      ret = min(b, tval)
       b = min(b, ret)
       if a>=b:
         break
@@ -91,6 +91,4 @@ if __name__=="__main__":
 
   print("With explore leaves")
   ret = explore_leaves(s,v)
-  print(ret)
-  
-
+  print([x[0] for x in ret])

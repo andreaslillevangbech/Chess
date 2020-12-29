@@ -17,6 +17,7 @@ def get_data(num_samples=None):
         game = chess.pgn.read_game(pgn)
       except:
         print("end of file")
+        print(f"number of samples is {len(X)}")
         break
       if game is None:
         break
@@ -39,6 +40,6 @@ def get_data(num_samples=None):
   return X,Y
 
 if __name__=="__main__":
-  X,Y = get_data(50e5)
-  np.savez("processed/dataset_25M.npz", X, Y)
+  X,Y = get_data(10e6)
+  np.savez("processed/dataset2_25M.npz", X, Y)
 
