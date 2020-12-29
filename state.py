@@ -10,6 +10,10 @@ class State():
     else:
       self.board = board
 
+  def key(self):
+    return (self.board.board_fen(), self.board.turn, \
+            self.board.castling_rights, self.board.ep_square)
+
   def serialize(self):
     # board to 8x8x5 bitvector
     import numpy as np
@@ -56,7 +60,7 @@ class State():
     return state
 
   def edges(self):
-    list(self.generate_legal_moves)
+    return list(self.board.legal_moves)
 
   def value(self):
     return 1 # Commies will be happy to know all board reps are equal
